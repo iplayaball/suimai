@@ -1,4 +1,4 @@
- server:
+server:
   port: 10000
 
 spring:
@@ -26,3 +26,4 @@ mybatis-plus:
 logging:
   level:
     com.atguigu.gulimall: debug
+
