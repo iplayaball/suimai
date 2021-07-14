@@ -1,9 +1,9 @@
  server:
-  port: 10000
+  port: 9000
 
 spring:
   application:
-    name: product
+    name: order
   cloud:
     nacos:
       discovery:
@@ -12,7 +12,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://localhost:3306/suimai_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/suimai_oms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.jdbc.Driver
 
 
