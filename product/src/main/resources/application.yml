@@ -25,5 +25,5 @@ mybatis-plus:
       logic-not-delete-value: 0
 logging:
   level:
-    com.atguigu.gulimall: debug
+    com.study.suimai: debug
 
