@@ -42,9 +42,9 @@ public class CategoryController {
      */
     @RequestMapping("/list/tree")
     public R listTree(){
-        List<CategoryEntity> categorys = categoryService.listTree();
+        List<CategoryEntity> categoryTree = categoryService.listTree();
 
-        return R.ok().put("categorys", categorys);
+        return R.ok().put("categoryTree", categoryTree);
     }
 
 
