@@ -88,7 +88,7 @@ public class CategoryController {
     // @RequiresPermissions("product:category:delete")
     public R delete(@RequestBody Long[] catIds){
 		categoryService.removeByIds(Arrays.asList(catIds));
-
+        System.out.println("1111111111测试热部署");
         return R.ok();
     }
 
