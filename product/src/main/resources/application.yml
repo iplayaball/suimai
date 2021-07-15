@@ -2,6 +2,14 @@ server:
   port: 10000
 
 spring:
+  devtools:
+    restart:
+      # 设置热部署生效
+      enabled: true
+      # 设置重启的目录
+      additional-paths: src/main/java
+      # WEB-INF目录下内容发生更改不重启
+      exclude: WEB-INF/*
   application:
     name: product
   cloud:
