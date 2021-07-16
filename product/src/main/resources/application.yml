@@ -22,6 +22,8 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/suimai_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.jdbc.Driver
+  jackson:
+    time-zone: GMT+08
 
 
 mybatis-plus:
