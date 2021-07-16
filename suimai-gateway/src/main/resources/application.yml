@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: suimai-gateway
+  jackson:
+    time-zone: GMT+08
   cloud:
     nacos:
       discovery:

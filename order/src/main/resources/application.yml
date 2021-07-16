@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: order
+  jackson:
+    time-zone: GMT+08
   cloud:
     nacos:
       discovery:
