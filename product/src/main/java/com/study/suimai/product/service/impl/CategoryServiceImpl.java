@@ -10,9 +10,7 @@ import com.study.suimai.product.entity.CategoryEntity;
 import com.study.suimai.product.service.CategoryService;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -61,4 +59,27 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return categoryChildrenTree;
     }
 
+    /**
+     * 根据三级分类ID 获取完整的父分类数组
+     * @param catelogId
+     * @return
+     */
+    @Override
+    public Long[] findCatelogPath(Long catelogId) {
+        ArrayList<Long> path = new ArrayList<>();
+
+        findParentId(catelogId, path);
+
+        Collections.reverse(path);
+        return path.toArray(new Long[path.size()]);
+    }
+
+    private void findParentId(Long catelogId, ArrayList<Long> path) {
+        path.add(catelogId);
+        CategoryEntity categoryEntity = this.getById(catelogId);
+        Long parentCid = categoryEntity.getParentCid();
+        if (parentCid !=0) {
+            findParentId(parentCid, path);
+        }
+    }
 }
