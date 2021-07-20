@@ -1,5 +1,6 @@
 package com.study.suimai.product.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.study.common.utils.PageUtils;
 import com.study.common.utils.R;
 import com.study.suimai.product.entity.CategoryBrandRelationEntity;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -37,14 +39,21 @@ public class CategoryBrandRelationController {
     }
 
     /**
-     * 列表
+     * 品牌下关联的分类
+     * 返回分类ID和名称
      */
     @RequestMapping("/catelog/list")
     // @RequiresPermissions("product:categorybrandrelation:list")
-    public R listByBrandId(@RequestParam Map<String, Object> params){
-        PageUtils page = categoryBrandRelationService.queryPage(params);
+    public R listByBrandId(@RequestParam("brandId") Long brandId){
+//        List<CategoryBrandRelationEntity> entities = categoryBrandRelationService.list(
+//                new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id", brandId)
+//        );
+        List<CategoryBrandRelationEntity> entities = categoryBrandRelationService.list(
+                new LambdaQueryWrapper<CategoryBrandRelationEntity>()
+                        .eq(CategoryBrandRelationEntity::getBrandId, brandId)
+        );
 
-        return R.ok().put("page", page);
+        return R.ok().put("data", entities);
     }
 
 
@@ -65,7 +74,7 @@ public class CategoryBrandRelationController {
     @RequestMapping("/save")
     // @RequiresPermissions("product:categorybrandrelation:save")
     public R save(@RequestBody CategoryBrandRelationEntity categoryBrandRelation){
-		categoryBrandRelationService.save(categoryBrandRelation);
+		categoryBrandRelationService.saveDetail(categoryBrandRelation);
 
         return R.ok();
     }
