@@ -2,6 +2,7 @@ package com.study.suimai.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mysql.cj.util.StringUtils;
@@ -120,6 +121,31 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     attrAttrgroupRelationEntity.setAttrId(attrEntity.getAttrId());
     attrAttrgroupRelationEntity.setAttrGroupId(attr.getAttrGroupId());
     attrAttrgroupRelationService.save(attrAttrgroupRelationEntity);
+  }
+
+  @Transactional
+  @Override
+  public void updateCascade(AttrVo attrvo) {
+    AttrEntity attrEntity = new AttrEntity();
+    BeanUtils.copyProperties(attrvo, attrEntity);
+
+    this.updateById(attrEntity);
+
+    AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = new AttrAttrgroupRelationEntity();
+    attrAttrgroupRelationEntity.setAttrGroupId(attrvo.getAttrGroupId());
+
+    int count = attrAttrgroupRelationService
+     .count(new QueryWrapper<AttrAttrgroupRelationEntity>()
+      .eq("attr_id", attrEntity.getAttrId()));
+    if (count != 0) {
+      attrAttrgroupRelationService
+       .update(attrAttrgroupRelationEntity,
+        new UpdateWrapper<AttrAttrgroupRelationEntity>()
+         .eq("attr_id", attrEntity.getAttrId()));
+    }else {
+      attrAttrgroupRelationEntity.setAttrId(attrEntity.getAttrId());
+      attrAttrgroupRelationService.save(attrAttrgroupRelationEntity);
+    }
   }
 
   @Override
