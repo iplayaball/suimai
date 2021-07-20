@@ -12,6 +12,7 @@ import com.study.suimai.product.service.BrandService;
 import com.study.suimai.product.service.CategoryBrandRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -45,6 +46,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
   }
 
   @Override
+  @Transactional
   public void updateCascade(BrandEntity brand) {
     this.updateById(brand);
 
