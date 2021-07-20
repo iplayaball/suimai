@@ -3,6 +3,7 @@ package com.study.suimai.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.study.common.utils.PageUtils;
 import com.study.suimai.product.entity.AttrEntity;
+import com.study.suimai.product.vo.AttrRespVo;
 import com.study.suimai.product.vo.AttrVo;
 
 import java.util.Map;
@@ -21,5 +22,7 @@ public interface AttrService extends IService<AttrEntity> {
   void saveAttrVo(AttrVo attr);
 
   PageUtils queryPage(Map<String, Object> params, Long catelogId);
+
+  AttrRespVo getDetailById(Long attrId);
 }
 

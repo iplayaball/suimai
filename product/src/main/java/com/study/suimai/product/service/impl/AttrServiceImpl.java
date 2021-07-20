@@ -17,6 +17,7 @@ import com.study.suimai.product.entity.AttrGroupEntity;
 import com.study.suimai.product.entity.CategoryEntity;
 import com.study.suimai.product.service.AttrAttrgroupRelationService;
 import com.study.suimai.product.service.AttrService;
+import com.study.suimai.product.service.CategoryService;
 import com.study.suimai.product.vo.AttrRespVo;
 import com.study.suimai.product.vo.AttrVo;
 import org.springframework.beans.BeanUtils;
@@ -35,6 +36,9 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
   @Autowired
   AttrAttrgroupRelationService attrAttrgroupRelationService;
+
+  @Autowired
+  CategoryService categoryService;
 
   @Resource
   AttrAttrgroupRelationDao attrAttrgroupRelationDao;
@@ -118,5 +122,38 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     attrAttrgroupRelationService.save(attrAttrgroupRelationEntity);
   }
 
+  @Override
+  public AttrRespVo getDetailById(Long attrId) {
+    // 查出基本信息
+    AttrEntity attrEntity = this.getById(attrId);
+    AttrRespVo attrRespVo = new AttrRespVo();
+    BeanUtils.copyProperties(attrEntity, attrRespVo);
 
+    // 分组信息
+    // 1 根据属性ID查出 AttrAttrgroupRelationEntity
+    AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = attrAttrgroupRelationDao
+     .selectOne(new LambdaQueryWrapper<AttrAttrgroupRelationEntity>()
+      .eq(AttrAttrgroupRelationEntity::getAttrId, attrId));
+    // 2 根据AttrAttrgroupRelationEntity 里的分类ID 查出attrGroupEntity
+    if (attrAttrgroupRelationEntity != null) {
+      Long attrGroupId = attrAttrgroupRelationEntity.getAttrGroupId();
+      AttrGroupEntity attrGroupEntity = attrGroupDao.selectById(attrGroupId);
+      if (attrGroupEntity != null) {
+        attrRespVo.setGroupName(attrGroupEntity.getAttrGroupName());
+        attrRespVo.setAttrGroupId(attrGroupId);
+      }
+    }
+
+    // 分类id完整路径
+    Long catelogId = attrEntity.getCatelogId();
+    Long[] catelogPath = categoryService.findCatelogPath(catelogId);
+    attrRespVo.setCatelogPath(catelogPath);
+
+    CategoryEntity categoryEntity = categoryDao.selectById(catelogId);
+    if (categoryEntity != null) {
+      attrRespVo.setCatelogName(categoryEntity.getName());
+    }
+
+    return attrRespVo;
+  }
 }
