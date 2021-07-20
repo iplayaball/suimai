@@ -9,6 +9,8 @@ import com.study.common.utils.Query;
 import com.study.suimai.product.dao.BrandDao;
 import com.study.suimai.product.entity.BrandEntity;
 import com.study.suimai.product.service.BrandService;
+import com.study.suimai.product.service.CategoryBrandRelationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -17,26 +19,41 @@ import java.util.Map;
 @Service("brandService")
 public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> implements BrandService {
 
-    @Override
-    public PageUtils queryPage(Map<String, Object> params) {
+  @Autowired
+  CategoryBrandRelationService categoryBrandRelationService;
 
-        String searchKey = (String) params.get("key");
+  @Override
+  public PageUtils queryPage(Map<String, Object> params) {
 
-        LambdaQueryWrapper<BrandEntity> wrapper = new LambdaQueryWrapper<>();
-        wrapper.and(! StringUtils.isNullOrEmpty(searchKey),
-                wrapper1 -> {
-                wrapper1
-                    .eq(BrandEntity::getBrandId, searchKey)
-                    .or()
-                    .like(BrandEntity::getName, searchKey);
-        });
+    String searchKey = (String) params.get("key");
 
-        IPage<BrandEntity> page = this.page(
-                new Query<BrandEntity>().getPage(params),
-                wrapper
-        );
+    LambdaQueryWrapper<BrandEntity> wrapper = new LambdaQueryWrapper<>();
+    wrapper.and(!StringUtils.isNullOrEmpty(searchKey),
+     wrapper1 -> {
+       wrapper1
+        .eq(BrandEntity::getBrandId, searchKey)
+        .or()
+        .like(BrandEntity::getName, searchKey);
+     });
 
-        return new PageUtils(page);
+    IPage<BrandEntity> page = this.page(
+     new Query<BrandEntity>().getPage(params),
+     wrapper
+    );
+
+    return new PageUtils(page);
+  }
+
+  @Override
+  public void updateCascade(BrandEntity brand) {
+    this.updateById(brand);
+
+    String brandName = brand.getName();
+    if (!StringUtils.isNullOrEmpty(brandName)) {
+      categoryBrandRelationService
+       .updateBrandNameByBrandId(brand.getBrandId(), brandName);
     }
+
+  }
 
 }

@@ -24,6 +24,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   jackson:
     time-zone: GMT+08
+    serialization:
+      indent-output: true
 
 
 mybatis-plus:
@@ -33,6 +35,8 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1
       logic-not-delete-value: 0
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 logging:
   level:
     com.study.suimai: debug
