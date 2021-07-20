@@ -2,7 +2,6 @@ package com.study.suimai.product.controller;
 
 import com.study.common.utils.PageUtils;
 import com.study.common.utils.R;
-import com.study.suimai.product.entity.AttrEntity;
 import com.study.suimai.product.service.AttrService;
 import com.study.suimai.product.vo.AttrRespVo;
 import com.study.suimai.product.vo.AttrVo;
@@ -29,11 +28,12 @@ public class AttrController {
   /**
    * 列表
    */
-  @RequestMapping("/base/list/{catelogId}")
+  @RequestMapping("/{attrType}/list/{catelogId}")
   // @RequiresPermissions("product:attr:list")
   public R listBase(@RequestParam Map<String, Object> params,
+                    @PathVariable("attrType") String attrType,
                     @PathVariable("catelogId") Long catelogId) {
-    PageUtils page = attrService.queryPage(params, catelogId);
+    PageUtils page = attrService.queryPage(params, attrType, catelogId);
 
     return R.ok().put("page", page);
   }
