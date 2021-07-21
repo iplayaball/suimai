@@ -3,6 +3,8 @@ package com.study.suimai.product.config;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.study.common.sql.SqlStatementInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +24,11 @@ public class MyBatisConfig {
 //        paginationInterceptor.setLimit(1000);
         mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return mybatisPlusInterceptor;
+    }
+
+    @Bean
+    public Interceptor sqlFormatter(){
+        return new SqlStatementInterceptor();
     }
 
 }

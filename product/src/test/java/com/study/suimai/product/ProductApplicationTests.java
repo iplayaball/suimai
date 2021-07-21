@@ -16,17 +16,17 @@ class ProductApplicationTests {
 
     @Test
     void contextLoads() {
-//		BrandEntity brandEntity = new BrandEntity();
-//		brandEntity.setName("华为");
-//		brandService.save(brandEntity);
+		BrandEntity brandEntity = new BrandEntity();
+		brandEntity.setName("测试格式化sql");
+		brandService.save(brandEntity);
 
 //		brandEntity.setBrandId(2L);
 //		brandEntity.setDescript("华为手机");
 //		brandService.updateById(brandEntity);
 
         List<BrandEntity> list = brandService.list();
-        list.forEach((entity) -> {
-            System.out.println("entity = " + entity);
-        });
+//        list.forEach((entity) -> {
+//            System.out.println("entity = " + entity);
+//        });
     }
 }
