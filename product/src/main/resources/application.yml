@@ -37,7 +37,7 @@ mybatis-plus:
       logic-not-delete-value: 0
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-#logging:
-#  level:
-#    com.study.suimai: debug
+logging:
+  level:
+    com.study.suimai: debug
 
