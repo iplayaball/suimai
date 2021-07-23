@@ -4,6 +4,7 @@ import com.study.common.utils.PageUtils;
 import com.study.common.utils.R;
 import com.study.suimai.product.entity.AttrEntity;
 import com.study.suimai.product.entity.AttrGroupEntity;
+import com.study.suimai.product.service.AttrAttrgroupRelationService;
 import com.study.suimai.product.service.AttrGroupService;
 import com.study.suimai.product.service.AttrService;
 import com.study.suimai.product.service.CategoryService;
@@ -35,6 +36,17 @@ public class AttrGroupController {
   @Autowired
   private CategoryService categoryService;
 
+  @Autowired
+  AttrAttrgroupRelationService relationService;
+
+  // 保存关联关系
+  @PostMapping("/attr/relation")
+  public R addRelation(@RequestBody List<AttrGroupRelationVo> vos){
+
+    relationService.saveBatch(vos);
+    return R.ok();
+  }
+
   // 删除关联关系
   @PostMapping("/attr/relation/delete")
     public R deleteRelation(@RequestBody  List<AttrGroupRelationVo> vos){
@@ -51,6 +63,16 @@ public class AttrGroupController {
     List<AttrEntity> entities = attrService.getByGroupId(attrgroupId);
 
     return R.ok().put("data", entities);
+  }
+
+  /**
+   * 列出当前分类下没有被关联的属性（可以被关联）
+   */
+  @GetMapping("/{attrgroupId}/noattr/relation")
+  public R attrNoRelation(@PathVariable("attrgroupId") Long attrgroupId,
+                          @RequestParam Map<String, Object> params){
+    PageUtils page = attrService.getNoRelationAttr(params,attrgroupId);
+    return R.ok().put("page",page);
   }
 
   /**
