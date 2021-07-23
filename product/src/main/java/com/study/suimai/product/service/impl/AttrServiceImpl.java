@@ -258,6 +258,26 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     return pageUtils;
   }
 
+  /**
+   * 根据分组id查找关联的所有基本属性
+   * @param attrgroupId
+   * @return
+   */
+  @Override
+  public List<AttrEntity> getRelationAttr(Long attrgroupId) {
+    List<AttrAttrgroupRelationEntity> entities = relationDao
+     .selectList(new QueryWrapper<AttrAttrgroupRelationEntity>()
+     .eq("attr_group_id", attrgroupId));
+
+    List<Long> attrIds = entities.stream()
+     .map(AttrAttrgroupRelationEntity::getAttrId).collect(Collectors.toList());
+
+    if(attrIds.size() == 0){
+      return null;
+    }
+    return this.listByIds(attrIds);
+  }
+
   // 修改表单时，回显详细信息
   @Override
   public AttrRespVo getDetailById(Long attrId) {

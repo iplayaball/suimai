@@ -3,7 +3,9 @@ package com.study.suimai.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.study.common.utils.PageUtils;
 import com.study.suimai.product.entity.AttrGroupEntity;
+import com.study.suimai.product.vo.AttrGroupWithAttrsVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,8 +17,10 @@ import java.util.Map;
  */
 public interface AttrGroupService extends IService<AttrGroupEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+  PageUtils queryPage(Map<String, Object> params);
 
-    PageUtils queryPage(Map<String, Object> params, long catelogId);
+  PageUtils queryPage(Map<String, Object> params, long catelogId);
+
+  List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCatelogId(Long catelogId);
 }
 
