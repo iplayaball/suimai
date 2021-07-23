@@ -58,7 +58,8 @@ public class SqlStatementInterceptor implements Interceptor {
       if (invocation.getArgs().length > 1) {
         parameter = invocation.getArgs()[1];
       }
-      logger.debug("查询参数: " + parameter);
+//      logger.debug("查询参数: " + parameter);
+      logger.debug("query param: " + parameter);
       String sqlId = ms.getId();// 获取到节点的id,即sql语句的id
       BoundSql boundSql = ms.getBoundSql(parameter);  // BoundSql就是封装myBatis最终产生的sql类
       Configuration configuration = ms.getConfiguration();  // 获取节点的配置
@@ -74,7 +75,8 @@ public class SqlStatementInterceptor implements Interceptor {
                               long time) {
     String sql = showSql(configuration, boundSql);
     StringBuilder str = new StringBuilder(100);
-    str.append(sqlId).append(":耗时【").append(time).append("】毫秒");
+//    str.append(sqlId).append(":耗时【").append(time).append("】毫秒");
+    str.append(sqlId).append("spend: [").append(time).append("] millisecond");
     String begin = "======sql begin=====";
     String end = "------sql end------";
     logger.info(begin);
