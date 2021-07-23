@@ -17,6 +17,7 @@
 		<module>renren-fast</module>
 		<module>common</module>
         <module>suimai-gateway</module>
+		<module>suimai-third-party</module>
     </modules>
 
 </project>
