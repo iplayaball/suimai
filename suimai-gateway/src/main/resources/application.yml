@@ -31,21 +31,21 @@ spring:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: third_party_route
-          uri: lb://gulimall-third-party
+          uri: lb://suimai-third-party
           predicates:
             - Path=/api/thirdparty/**
           filters:
             - RewritePath=/api/thirdparty/(?<segment>.*),/$\{segment}
         #
         #        - id: member_route
-        #          uri: lb://gulimall-member
+        #          uri: lb://suimai-member
         #          predicates:
         #            - Path=/api/member/**
         #          filters:
         #            - RewritePath=/api/(?<segment>.*),/$\{segment}
         #
         - id: ware_route
-          uri: lb://gulimall-ware
+          uri: lb://suimai-ware
           predicates:
             - Path=/api/ware/**
           filters:
