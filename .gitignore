@@ -16,3 +16,6 @@ buildNumber.properties
 **/.idea
 
 /hs_err_pid11596.log
+**/replay_pid7608.log
+**/hs_err_*.log
+
