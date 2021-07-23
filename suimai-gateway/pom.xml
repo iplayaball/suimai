@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+		<skipTests>true</skipTests>
 	</properties>
 	<dependencies>
 		<dependency>
