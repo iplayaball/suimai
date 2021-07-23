@@ -3,9 +3,11 @@ package com.study.suimai.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.study.common.utils.PageUtils;
 import com.study.suimai.product.entity.AttrEntity;
+import com.study.suimai.product.vo.AttrGroupRelationVo;
 import com.study.suimai.product.vo.AttrRespVo;
 import com.study.suimai.product.vo.AttrVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,5 +28,9 @@ public interface AttrService extends IService<AttrEntity> {
   AttrRespVo getDetailById(Long attrId);
 
   void updateCascade(AttrVo attrvo);
+
+  List<AttrEntity> getByGroupId(Long attrgroupId);
+
+  void deleteRelation(List<AttrGroupRelationVo> vos);
 }
 

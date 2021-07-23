@@ -20,6 +20,7 @@ import com.study.suimai.product.entity.CategoryEntity;
 import com.study.suimai.product.service.AttrAttrgroupRelationService;
 import com.study.suimai.product.service.AttrService;
 import com.study.suimai.product.service.CategoryService;
+import com.study.suimai.product.vo.AttrGroupRelationVo;
 import com.study.suimai.product.vo.AttrRespVo;
 import com.study.suimai.product.vo.AttrVo;
 import org.springframework.beans.BeanUtils;
@@ -43,7 +44,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
   CategoryService categoryService;
 
   @Resource
-  AttrAttrgroupRelationDao attrAttrgroupRelationDao;
+  AttrAttrgroupRelationDao relationDao;
 
   @Resource
   AttrGroupDao attrGroupDao;
@@ -61,6 +62,13 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     return new PageUtils(page);
   }
 
+  /**
+   * 分页列表
+   * @param params
+   * @param attrType
+   * @param catelogId
+   * @return
+   */
   @Override
   public PageUtils queryPage(Map<String, Object> params, String attrType, Long catelogId) {
     boolean isBaseType = "base".equalsIgnoreCase(attrType);
@@ -91,7 +99,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
       if (isBaseType) {
         // 设置分组名称
         // 1 根据属性ID查出 AttrAttrgroupRelationEntity
-        AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = attrAttrgroupRelationDao
+        AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = relationDao
          .selectOne(new LambdaQueryWrapper<AttrAttrgroupRelationEntity>()
           .eq(AttrAttrgroupRelationEntity::getAttrId, attrEntity.getAttrId()));
         // 2 根据AttrAttrgroupRelationEntity 里的分类ID 查出attrGroupEntity
@@ -116,6 +124,10 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     return pageUtils;
   }
 
+  /**
+   * 保存（分组ID在中间表）
+   * @param attr
+   */
   @Transactional
   @Override
   public void saveAttrVo(AttrVo attr) {
@@ -132,6 +144,13 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     }
   }
 
+  /**
+   * 修改（如果有是基本属性，
+   *  那就查看是否有关联的分组，
+   *    有的话就更新关联的分组，
+   *    没有的话就新建一个关联）
+   * @param attrvo
+   */
   @Transactional
   @Override
   public void updateCascade(AttrVo attrvo) {
@@ -147,7 +166,9 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
       int count = attrAttrgroupRelationService
        .count(new QueryWrapper<AttrAttrgroupRelationEntity>()
         .eq("attr_id", attrEntity.getAttrId()));
+      // 判断中间表是否有此 attr id 关联的记录
       if (count != 0) {
+        // 有的话就更新关联的 分组 id
         attrAttrgroupRelationService
          .update(attrAttrgroupRelationEntity,
           new UpdateWrapper<AttrAttrgroupRelationEntity>()
@@ -159,6 +180,34 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     }
   }
 
+  // 获取一个分组下已经关联的所有属性
+  @Override
+  public List<AttrEntity> getByGroupId(Long attrgroupId) {
+    List<AttrAttrgroupRelationEntity> relationEntities = attrAttrgroupRelationService
+     .list(new LambdaQueryWrapper<AttrAttrgroupRelationEntity>()
+      .eq(AttrAttrgroupRelationEntity::getAttrGroupId, attrgroupId));
+
+    List<Long> ids = relationEntities.stream()
+     .map(AttrAttrgroupRelationEntity::getAttrId)
+     .collect(Collectors.toList());
+
+    List<AttrEntity> entities = this.listByIds(ids);
+    return entities;
+  }
+
+  // 批量删除关联关系
+  @Override
+  public void deleteRelation(List<AttrGroupRelationVo> vos) {
+    List<AttrAttrgroupRelationEntity> entities = vos.stream()
+     .map((item) -> {
+      AttrAttrgroupRelationEntity relationEntity = new AttrAttrgroupRelationEntity();
+      BeanUtils.copyProperties(item, relationEntity);
+      return relationEntity;
+    }).collect(Collectors.toList());
+    relationDao.deleteBatchRelation(entities);
+  }
+
+  // 修改表单时，回显详细信息
   @Override
   public AttrRespVo getDetailById(Long attrId) {
     // 查出基本信息
@@ -168,7 +217,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
     // 分组信息
     // 1 根据属性ID查出 AttrAttrgroupRelationEntity
-    AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = attrAttrgroupRelationDao
+    AttrAttrgroupRelationEntity attrAttrgroupRelationEntity = relationDao
      .selectOne(new LambdaQueryWrapper<AttrAttrgroupRelationEntity>()
       .eq(AttrAttrgroupRelationEntity::getAttrId, attrId));
     // 2 根据AttrAttrgroupRelationEntity 里的分类ID 查出attrGroupEntity
