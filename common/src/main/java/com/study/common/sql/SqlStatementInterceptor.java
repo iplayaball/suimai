@@ -76,7 +76,7 @@ public class SqlStatementInterceptor implements Interceptor {
     String sql = showSql(configuration, boundSql);
     StringBuilder str = new StringBuilder(100);
 //    str.append(sqlId).append(":耗时【").append(time).append("】毫秒");
-    str.append(sqlId).append("spend: [").append(time).append("] millisecond");
+    str.append(sqlId).append(" spend: [").append(time).append("] millisecond");
     String begin = "======sql begin=====";
     String end = "------sql end------";
     logger.info(begin);
