@@ -26,6 +26,7 @@ spring:
     time-zone: GMT+08
     serialization:
       indent-output: true
+    date-format: yyyy-MM-dd HH:mm:ss
 
 
 mybatis-plus:
