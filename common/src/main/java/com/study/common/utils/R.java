@@ -1,11 +1,3 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
-
 package com.study.common.utils;
 
 import org.apache.http.HttpStatus;
@@ -60,5 +52,10 @@ public class R extends HashMap<String, Object> {
 	public R put(String key, Object value) {
 		super.put(key, value);
 		return this;
+	}
+
+	public Integer getCode() {
+
+		return (Integer) this.get("code");
 	}
 }

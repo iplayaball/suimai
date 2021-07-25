@@ -3,11 +3,14 @@ package com.study.suimai.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.study.common.constant.ProductConstant;
 import com.study.common.to.es.SkuEsModel;
 import com.study.common.utils.PageUtils;
 import com.study.common.utils.Query;
+import com.study.common.utils.R;
 import com.study.suimai.product.dao.SpuInfoDao;
 import com.study.suimai.product.entity.*;
+import com.study.suimai.product.feign.SearchFeignService;
 import com.study.suimai.product.service.*;
 import com.study.suimai.product.vo.SpuSaveVo;
 import com.study.suimai.product.vo.spusave.Attr;
@@ -20,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +62,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
   @Autowired
   private CategoryService categoryService;
+
+  @Resource
+  SearchFeignService searchFeignService;
 
 
   //  @GlobalTransactional(rollbackFor = Exception.class)
@@ -146,16 +153,16 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
     }).collect(Collectors.toList());
 
     //3、将数据发给es进行保存：gulimall-search
-    /*R r = searchFeignService.productStatusUp(collect);
+    R r = searchFeignService.productStatusUp(collect);
 
     if (r.getCode() == 0) {
       //远程调用成功
-      //TODO 6、修改当前spu的状态
+      // 6、修改当前spu的状态
       this.baseMapper.updaSpuStatus(spuId, ProductConstant.ProductStatusEnum.SPU_UP.getCode());
     } else {
       //远程调用失败
       //TODO 7、重复调用？接口幂等性:重试机制
-    }*/
+    }
   }
 
   /**
