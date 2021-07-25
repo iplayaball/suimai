@@ -2,7 +2,9 @@ package com.study.suimai.product;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
+@EnableFeignClients(basePackages = "com.study.suimai.product.feign")
 //@EnableDiscoveryClient
 //@MapperScan("com.study.suimai.product.dao")
 @SpringBootApplication
