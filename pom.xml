@@ -10,9 +10,10 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>member</module>
-		<module>order</module>
-		<module>ware</module>
+<!--		<module>member</module>-->
+<!--		<module>order</module>-->
+<!--		<module>ware</module>-->
+<!--		<module>renren-generator</module>-->
 		<module>product</module>
 		<module>renren-fast</module>
 		<module>common</module>
