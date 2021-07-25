@@ -27,6 +27,8 @@ spring:
     serialization:
       indent-output: true
     date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false
 
 
 mybatis-plus:

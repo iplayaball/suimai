@@ -16,12 +16,14 @@ import java.util.Map;
  */
 public interface CategoryService extends IService<CategoryEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+  PageUtils queryPage(Map<String, Object> params);
 
-    List<CategoryEntity> listTree();
+  List<CategoryEntity> listTree();
 
-    Long[] findCatelogPath(Long catelogId);
+  Long[] findCatelogPath(Long catelogId);
 
   void updateCascade(CategoryEntity category);
+
+  List<CategoryEntity> getLevel1Categorys();
 }
 
