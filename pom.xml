@@ -18,6 +18,7 @@
 		<module>common</module>
         <module>suimai-gateway</module>
 		<module>suimai-third-party</module>
+		<module>suimai-search</module>
     </modules>
 
 </project>

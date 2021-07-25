@@ -1,0 +1,12 @@
+server:
+  port: 40000
+spring:
+  application:
+    name: suimai-search
+  jackson:
+    time-zone: GMT+08
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        ip: 127.0.0.1
