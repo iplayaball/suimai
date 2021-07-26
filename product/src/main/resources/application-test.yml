@@ -15,9 +15,13 @@ spring:
     port: 6379
   cache:
     type: redis
+    redis:
+      time-to-live: 600000  #10分钟
+      #是否缓存空值，防止缓存穿透
+      cache-null-values: true
 
 mydef:
   sql:
     formatter:
-      log: false
+      log: true
 
