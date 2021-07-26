@@ -148,7 +148,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     return categoryEntities;
   }
 
-  @Cacheable(value = "category",key = "#root.methodName")
+  @Cacheable(value = "category",key = "#root.method.name")
   @Override
   public Map<String, List<Catelog2Vo>> getCatalogJson() {
     System.out.println("查询了数据库");
