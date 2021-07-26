@@ -11,5 +11,8 @@ spring:
     password: root
     url: jdbc:mysql://172.18.0.1:3306/suimai_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
 
-
+mydef:
+  sql:
+    formatter:
+      log: false
 

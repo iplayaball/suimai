@@ -6,11 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import com.study.common.sql.SqlStatementInterceptor;
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@ConditionalOnProperty(prefix = "mydef.sql.formatter",name = "log",havingValue = "true")
 @EnableTransactionManagement
 @MapperScan("com.study.suimai.product.dao")
 public class MyBatisConfig {

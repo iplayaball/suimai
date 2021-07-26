@@ -43,4 +43,7 @@ mybatis-plus:
 #logging:
 #  level:
 #    com.study.suimai: debug
-
+mydef:
+  sql:
+    formatter:
+      log: true
