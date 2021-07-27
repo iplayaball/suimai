@@ -1101,8 +1101,9 @@
 						</div>
 					</div>
 					<!--收货地址-->
-					<!--
+
 					<div class="filter_bottom">
+						<!--
 						<div class="filter_bottom_left">
 							<div class="fs-cell">收货地</div>
 							<div class="dizhi">
@@ -1180,42 +1181,21 @@
 								</div>
 							</div>
 						</div>
+						-->
 						<div class="filter_bottom_right">
 							<ul>
-								<li>
-									<a href="/static/search/#">
-										<i></i>
-										谷粒商城配送
-									</a>
-								</li>
-								<li>
-									<a href="/static/search/#">
-										<i></i>
-										京尊达 </a>
-								</li>
-								<li>
-									<a href="/static/search/#">
-										<i></i>
-										货到付款
-									</a>
-								</li>
+
 								<li>
 									<a th:with="check = ${param.hasStock}">
 										<input id="showHasStock" type="checkbox" th:checked="${#strings.equals(check,'1')?true:false}">
 										仅显示有货
 									</a>
 								</li>
-								<li>
-									<a href="/static/search/#">
-										<i></i>
-										可配送全球
-									</a>
-								</li>
 							</ul>
 						</div>
 
 					</div>
--->
+
 					<!--排序内容，每四个是一组-->
 					<div class="rig_tab">
 						<div th:each="product : ${result.getProduct()}">
