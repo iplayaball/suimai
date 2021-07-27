@@ -22,7 +22,7 @@ public class SearchController {
      * @param param
      * @return
      */
-    @GetMapping(value = "/")
+    @GetMapping(value = "/list.html")
     public String listPage(SearchParam param, Model model, HttpServletRequest request) {
 
         param.set_queryString(request.getQueryString());
@@ -32,7 +32,7 @@ public class SearchController {
 
         model.addAttribute("result",result);
 
-        return "index";
+        return "list";
     }
 
 }
