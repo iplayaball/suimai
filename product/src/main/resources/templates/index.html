@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>谷粒商城2020</title>
+	<title>穗麦商城</title>
 	<link rel="stylesheet" href="/static/index/css/swiper-3.4.2.min.css">
 	<link rel="stylesheet" href="/static/index/css/GL.css">
 	<script src="/static/index/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<div class="top_find">
+<!--<div class="top_find">
 	<div class="top_find_son">
 		<img src="/static/index/img/top_find_logo.png" alt="">
 		<div class="input_find">
@@ -40,20 +40,20 @@
 	<li class="left_floor_lv">旅行健康</li>
 	<li class="left_floor_hai">还没逛够</li>
 	<li class="left_floor_ding">顶部</li>
-</ul>
+</ul>-->
 <header>
-	<div class="head">
+	<!--<div class="head">
 		<a href="#"><img src="/static/index/img/img_01.png"/></a>
 		<p>X</p>
-	</div>
+	</div>-->
 	<!--头部-->
 	<div class="header_head">
 		<div class="header_head_box">
-			<a href="#" class="img"><img src="/static/index/img/logo.jpg"/></a>
+			<!--<a href="#" class="img"><img src="/static/index/img/logo.jpg"/></a>
 			<b class="header_head_p">
 				<a href="#">
 					<img src="/static/index/img/img_05.png" style="border-radius: 50%;"/>
-					<!--<span class="glyphicon glyphicon-map-marker"></span>-->
+					&lt;!&ndash;<span class="glyphicon glyphicon-map-marker"></span>&ndash;&gt;
 					北京</a>
 				<div class="header_head_p_cs">
 					<a href="#" style="background: #C81623;color: #fff;">北京</a>
@@ -93,6 +93,7 @@
 					<a href="#">海外</a>
 				</div>
 			</b>
+			-->
 			<ul>
 				<li>
 					<a th:if="${session.loginUser != null}">欢迎, [[${session.loginUser.nickname}]]</a>
@@ -132,7 +133,7 @@
 				<p>购物车中还没有商品，赶紧选购吧！</p>
 			</div>
 		</div>
-		<div class="header_form_nav">
+		<!--<div class="header_form_nav">
 			<ul>
 				<li>
 					<a href="#" class="aaaaa">满999减300</a>
@@ -199,7 +200,7 @@
 		</nav>
 		<div class="right">
 			<a href="#"><img src="/static/index/img/img_21.png"/></a>
-		</div>
+		</div>-->
 	</div>
 	<!--轮播主体内容-->
 	<div class="header_main">
@@ -239,7 +240,7 @@
 					<a href="#"><img src="/static/index/img/5a154759N5385d5d6.jpg"/></a>
 				</div>
 			</div>
-			<div class="header_main_right">
+			<!--<div class="header_main_right">
 				<div class="header_main_right_user">
 					<div class="user_info">
 						<div class="user_info_tou">
@@ -487,21 +488,22 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 		</div>
-		<div class="header_banner1">
+		<!--<div class="header_banner1">
 			<a href="#" class="a">
 				<img src="/static/index/img/5a1e5ce2N034ce344.png" class="aa"/>
 			</a>
 			<div class="header_banner1_div">
 				<p>X</p>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </header>
+<!--
 
 <div class="section_second">
-	<!-- 第一层 -->
+	&lt;!&ndash; 第一层 &ndash;&gt;
 	<div class="section_second_header">
 		<p class="section_second_header_img"></p>
 		<div class="section_second_header_left">
@@ -525,7 +527,7 @@
 		<div class="swiper-container swiper_section_second_list_left">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
-					<!-- 动态拼装秒杀商品信息 -->
+					&lt;!&ndash; 动态拼装秒杀商品信息 &ndash;&gt;
 					<ul id="seckillSkuContent"></ul>
 				</div>
 				<div class="swiper-slide">
@@ -583,13 +585,15 @@
 
 
 </div>
+-->
 
 
 </body>
+
 <script type="text/javascript">
   function search() {
     var keyword=$("#searchText").val()
-    window.location.href="http://search.gulimall.com/list.html?keyword="+keyword;
+    window.location.href="/search/list.html?keyword="+keyword;
   }
 
   $.get("http://seckill.gulimall.com/getCurrentSeckillSkus", function (res) {
