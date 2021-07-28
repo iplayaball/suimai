@@ -68,7 +68,7 @@ spring:
         - id: search_route
           uri: lb://suimai-auth-server
           predicates:
-            - Path=/search/**
+            - Path=/auth/**
           filters:
             - RewritePath=/auth/(?<segment>.*),/$\{segment}
 
