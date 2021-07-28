@@ -13,17 +13,17 @@
         <result property="attrSort" column="attr_sort"/>
     </resultMap>
 
-<!--    <resultMap id="skuItemSaleAttrVo" type="com.study.suimai.product.vo.SkuItemSaleAttrVo">-->
-<!--        <result column="attr_id" property="attrId"></result>-->
-<!--        <result column="attr_name" property="attrName"></result>-->
-<!--        <collection property="attrValues" ofType="com.study.suimai.product.vo.AttrValueWithSkuIdVo">-->
-<!--            <result column="attr_value" property="attrValue"></result>-->
-<!--            <result column="sku_ids" property="skuIds"></result>-->
-<!--        </collection>-->
-<!--    </resultMap>-->
+    <resultMap id="skuItemSaleAttrVo" type="com.study.suimai.product.vo.SkuItemSaleAttrVo">
+        <result column="attr_id" property="attrId"></result>
+        <result column="attr_name" property="attrName"></result>
+        <collection property="attrValues" ofType="com.study.suimai.product.vo.AttrValueWithSkuIdVo">
+            <result column="attr_value" property="attrValue"></result>
+            <result column="sku_ids" property="skuIds"></result>
+        </collection>
+    </resultMap>
 
-<!--    <select id="getSaleAttrBySpuId" resultMap="skuItemSaleAttrVo">-->
-    <select id="getSaleAttrBySpuId" resultType="com.study.suimai.product.vo.SkuItemSaleAttrVo">
+    <select id="getSaleAttrBySpuId" resultMap="skuItemSaleAttrVo">
+<!--    <select id="getSaleAttrBySpuId" resultType="com.study.suimai.product.vo.SkuItemSaleAttrVo">-->
         SELECT
             ssav.attr_id attr_id,
             ssav.attr_name attr_name,

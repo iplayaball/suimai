@@ -6,9 +6,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.common.utils.PageUtils;
 import com.study.common.utils.Query;
 import com.study.suimai.product.dao.SkuInfoDao;
+import com.study.suimai.product.entity.SkuImagesEntity;
 import com.study.suimai.product.entity.SkuInfoEntity;
+import com.study.suimai.product.entity.SpuInfoDescEntity;
 import com.study.suimai.product.service.*;
+import com.study.suimai.product.vo.SkuItemSaleAttrVo;
 import com.study.suimai.product.vo.SkuItemVo;
+import com.study.suimai.product.vo.SpuItemAttrGroupVo;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -16,6 +20,9 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ThreadPoolExecutor;
 
 
 @Service("skuInfoService")
@@ -36,8 +43,8 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 //  @Autowired
 //  private SeckillFeignService seckillFeignService;
 
-//  @Resource
-//  private ThreadPoolExecutor executor;
+  @Resource
+  private ThreadPoolExecutor executor;
 
   @Override
   public PageUtils queryPage(Map<String, Object> params) {
@@ -113,8 +120,8 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
   }
 
   @Override
-  public SkuItemVo item(Long skuId) {
-    /*SkuItemVo skuItemVo = new SkuItemVo();
+  public SkuItemVo item(Long skuId) throws ExecutionException, InterruptedException {
+    SkuItemVo skuItemVo = new SkuItemVo();
 
     CompletableFuture<SkuInfoEntity> infoFuture = CompletableFuture.supplyAsync(() -> {
       //1、sku基本信息的获取  pms_sku_info
@@ -154,7 +161,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
       skuItemVo.setImages(imagesEntities);
     }, executor);
 
-    *//*CompletableFuture<Void> seckillFuture = CompletableFuture.runAsync(() -> {
+    /*CompletableFuture<Void> seckillFuture = CompletableFuture.runAsync(() -> {
       //3、远程调用查询当前sku是否参与秒杀优惠活动
       R skuSeckilInfo = seckillFeignService.getSkuSeckilInfo(skuId);
       if (skuSeckilInfo.getCode() == 0) {
@@ -170,13 +177,12 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
           }
         }
       }
-    }, executor);*//*
+    }, executor);*/
 
 
     //等到所有任务都完成
-    CompletableFuture.allOf(saleAttrFuture,descFuture,baseAttrFuture,imageFuture,seckillFuture).get();
+    CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture).get();
 
-    return skuItemVo;*/
-    return null;
+    return skuItemVo;
   }
 }

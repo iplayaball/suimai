@@ -47,3 +47,9 @@ mydef:
   sql:
     formatter:
       log: true
+
+suimai:
+  thread:
+    coreSize: 20
+    maxSize: 200
+    keepAliveTime: 10
