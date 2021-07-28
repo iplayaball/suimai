@@ -1,6 +1,7 @@
 package com.study.suimai.product.web;
 
 import com.study.suimai.product.service.SkuInfoService;
+import com.study.suimai.product.vo.SkuItemVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,9 @@ public class ItemController {
 
         System.out.println("准备查询" + skuId + "详情");
 
-//        SkuItemVo vos = skuInfoService.item(skuId);
+        SkuItemVo vos = skuInfoService.item(skuId);
 
-//        model.addAttribute("item",vos);
+        model.addAttribute("item",vos);
 
         return "item";
     }
