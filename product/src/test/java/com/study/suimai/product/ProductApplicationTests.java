@@ -1,8 +1,10 @@
 package com.study.suimai.product;
 
 import com.study.suimai.product.dao.AttrGroupDao;
+import com.study.suimai.product.dao.SkuSaleAttrValueDao;
 import com.study.suimai.product.entity.BrandEntity;
 import com.study.suimai.product.service.BrandService;
+import com.study.suimai.product.vo.SkuItemSaleAttrVo;
 import com.study.suimai.product.vo.SpuItemAttrGroupVo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,16 @@ class ProductApplicationTests {
 
   @Resource
   private AttrGroupDao attrGroupDao;
+
+  @Resource
+  private SkuSaleAttrValueDao skuSaleAttrValueDao;
+
+  @Test
+  public void test1() {
+    List<SkuItemSaleAttrVo> saleAttrBySpuId = skuSaleAttrValueDao.getSaleAttrBySpuId(3L);
+//    saleAttrBySpuId.forEach(System.out::println);
+    System.out.println(saleAttrBySpuId);
+  }
 
   @Test
   public void test() {
