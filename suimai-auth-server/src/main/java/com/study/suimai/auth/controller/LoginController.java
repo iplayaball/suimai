@@ -7,6 +7,7 @@ import com.study.common.utils.R;
 import com.study.suimai.auth.feign.MemberFeignService;
 import com.study.suimai.auth.feign.ThirdPartFeignService;
 import com.study.suimai.auth.vo.UserRegisterVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
+@Slf4j
 @Controller
 public class LoginController {
 
@@ -104,12 +106,13 @@ public class LoginController {
        .toMap(FieldError::getField, FieldError::getDefaultMessage));
       attributes.addFlashAttribute("errors", errors);*/
       System.out.println(result.getFieldErrors());
+      log.debug(String.valueOf(result.getFieldErrors()));
 
       //效验出错回到注册页面
       return redirectRegUrl;
     }
 
-    //1、效验验证码
+    //1、校验验证码
     String code = vos.getCode();
 
     //获取存入Redis里的验证码
@@ -128,6 +131,7 @@ public class LoginController {
         } else {
           //失败
           Map<String, String> errors = new HashMap<>();
+          log.debug(register.getData("msg", new TypeReference<String>() {}));
           errors.put("msg", register.getData("msg", new TypeReference<String>() {
           }));
           attributes.addFlashAttribute("errors", errors);
@@ -138,6 +142,8 @@ public class LoginController {
       } else {
         //效验出错回到注册页面
         Map<String, String> errors = new HashMap<>();
+        log.debug("验证码错误");
+        log.debug("code error");
         errors.put("code", "验证码错误");
         attributes.addFlashAttribute("errors", errors);
         return redirectRegUrl;
@@ -145,6 +151,8 @@ public class LoginController {
     } else {
       //效验出错回到注册页面
       Map<String, String> errors = new HashMap<>();
+      log.debug("验证码不存在");
+      log.debug("code not ex");
       errors.put("code", "验证码不存在");
       attributes.addFlashAttribute("errors", errors);
       return redirectRegUrl;
