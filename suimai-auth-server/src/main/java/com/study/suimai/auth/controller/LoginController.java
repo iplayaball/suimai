@@ -12,7 +12,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +22,6 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -102,9 +100,10 @@ public class LoginController {
 
     //如果有错误回到注册页面
     if (result.hasErrors()) {
-      Map<String, String> errors = result.getFieldErrors().stream().collect(Collectors
+      /*Map<String, String> errors = result.getFieldErrors().stream().collect(Collectors
        .toMap(FieldError::getField, FieldError::getDefaultMessage));
-      attributes.addFlashAttribute("errors", errors);
+      attributes.addFlashAttribute("errors", errors);*/
+      System.out.println(result.getFieldErrors());
 
       //效验出错回到注册页面
       return redirectRegUrl;
