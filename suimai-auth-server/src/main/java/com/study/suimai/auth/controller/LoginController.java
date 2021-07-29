@@ -116,9 +116,9 @@ public class LoginController {
             attributes.addFlashAttribute("errors",errors);
             return "redirect:http://auth.gulimall.com/reg.html";
         }
-    }
+    }*/
 
-
+/*
     @GetMapping(value = "/login.html")
     public String loginPage(HttpSession session) {
 

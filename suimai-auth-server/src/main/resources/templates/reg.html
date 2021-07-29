@@ -25,7 +25,7 @@
 	</div>
 </header>
 <section>
-	<form action="/register" method="post" class="one">
+	<form action="/auth/register" method="post" class="one">
 		<!--		<div style="color: red" th:text="${errors != null ? (#maps.containsKey(errors, 'msg') ? errors.msg : '') : ''}">-->
 		<div class="register-box">
 			<label class="username_label">用 户 名
@@ -71,8 +71,8 @@
 		</div>
 		<div class="arguement">
 			<input type="checkbox" id="xieyi"> 阅读并同意
-			<a href="/static/reg/#">《穗麦商城用户注册协议》</a>
-			<a href="/static/reg/#">《隐私政策》</a>
+			<a href="#">《穗麦商城用户注册协议》</a>
+			<a href="#">《隐私政策》</a>
 			<div class="tips" style="color: red"
 			     th:text="${errors != null ? (#maps.containsKey(errors, 'code') ? errors.code : '') : ''}">
 
@@ -84,7 +84,8 @@
 		</div>
 
 	</form>
-	<div class="two">
+
+	<!--<div class="two">
 		<div class="right_r">
 			<div class="right_r1">
 				<img src="/static/reg/img/a65a18e877a16246a92e1b755bd88a03_03.png"/>
@@ -95,54 +96,54 @@
 				<span>INTERNATIONAL <br/> CUSTOMERS</span>
 			</div>
 		</div>
-	</div>
+	</div>-->
 </section>
 <br/><br/>
 <hr>
 <div class="footer">
 	<ul>
 		<li>
-			<a href="/static/reg/">关于我们</a>
+			<a href="#">关于我们</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">联系我们</a>
+			<a href="#">联系我们</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">人次招聘</a>
+			<a href="#">人次招聘</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">商家入驻</a>
+			<a href="#">商家入驻</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">广告服务</a>
+			<a href="#">广告服务</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">手机穗麦商城</a>
+			<a href="#">手机穗麦商城</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">友情链接</a>
+			<a href="#">友情链接</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">销售联盟</a>
+			<a href="#">销售联盟</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">穗麦商城社区</a>
+			<a href="#">穗麦商城社区</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">穗麦商城公益</a>
+			<a href="#">穗麦商城公益</a>
 		</li>
 		<li>|</li>
 		<li>
-			<a href="/static/reg/">English Site</a>
+			<a href="#">English Site</a>
 		</li>
 	</ul>
 </div>
