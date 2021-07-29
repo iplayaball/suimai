@@ -4,3 +4,6 @@ spring:
       discovery:
         server-addr: 172.18.0.1:8848
         ip: 172.18.0.1
+  redis:
+    host: 172.18.0.1
+    port: 6379
