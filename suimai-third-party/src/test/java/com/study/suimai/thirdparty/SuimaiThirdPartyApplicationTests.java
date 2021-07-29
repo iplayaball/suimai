@@ -1,7 +1,9 @@
 package com.study.suimai.thirdparty;
 
 import com.aliyun.oss.OSSClient;
+import com.study.suimai.thirdparty.component.SmsComponent;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -12,12 +14,18 @@ import java.io.InputStream;
 @SpringBootTest
 class SuimaiThirdPartyApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+
+	@Autowired
+	SmsComponent smsComponent;
 
 	@Resource
 	OSSClient ossClient;
+
+	@Test
+	void testSMS(){
+		smsComponent.sendCode("15243921342", "123456");
+	}
+
 
 	@Test
 	public void testUpload() throws FileNotFoundException {
