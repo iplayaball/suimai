@@ -11,13 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -82,7 +82,8 @@ public class LoginController {
    */
   @PostMapping(value = "/register")
   public String register(@Valid UserRegisterVo vos, BindingResult result,
-                         RedirectAttributes attributes) {
+                         Model model) {
+//                         RedirectAttributes attributes) {
 
     String url;
 //    url = request.getScheme() + "://"
@@ -92,7 +93,9 @@ public class LoginController {
 //    url = request.getScheme() + "://"
 //     + request.getServerName()
 //     + "/auth/";
-    url = "https://8089-cs-629891519430-default.cs-asia-east1-jnrc.cloudshell.dev"
+//    url = "https://8089-cs-629891519430-default.cs-asia-east1-jnrc.cloudshell.dev"
+//     + "/auth/";
+    url = "http://127.0.0.1"
      + "/auth/";
 
     String redirectRegUrl = "redirect:" + url + "reg.html";
@@ -104,12 +107,19 @@ public class LoginController {
     if (result.hasErrors()) {
       /*Map<String, String> errors = result.getFieldErrors().stream().collect(Collectors
        .toMap(FieldError::getField, FieldError::getDefaultMessage));
-      attributes.addFlashAttribute("errors", errors);*/
-      System.out.println(result.getFieldErrors());
-      log.debug(String.valueOf(result.getFieldErrors()));
+       会存在同一个字段，多个错误
+       */
+      Map<String, String> errors = new HashMap<>();
+      result.getFieldErrors().forEach(fieldError -> {
+        errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+      });
+//      attributes.addFlashAttribute("errors", errors);
+      model.addAttribute("errors", errors);
+      log.info(String.valueOf(result.getFieldErrors()));
 
       //效验出错回到注册页面
-      return redirectRegUrl;
+      return "reg";
+//      return "redirect:http://127.0.0.1/auth/reg.html";
     }
 
     //1、校验验证码
@@ -127,35 +137,36 @@ public class LoginController {
         R register = memberFeignService.register(vos);
         if (register.getCode() == 0) {
           //成功
-          return redirectLoginUrl;
+          return "login";
         } else {
           //失败
           Map<String, String> errors = new HashMap<>();
-          log.debug(register.getData("msg", new TypeReference<String>() {}));
+          log.info(register.getData("msg", new TypeReference<String>() {
+          }));
           errors.put("msg", register.getData("msg", new TypeReference<String>() {
           }));
-          attributes.addFlashAttribute("errors", errors);
-          return redirectRegUrl;
+          model.addAttribute("errors", errors);
+          return "reg";
         }
 
 
       } else {
         //效验出错回到注册页面
         Map<String, String> errors = new HashMap<>();
-        log.debug("验证码错误");
-        log.debug("code error");
+        log.info("验证码错误");
+        log.info("code error");
         errors.put("code", "验证码错误");
-        attributes.addFlashAttribute("errors", errors);
-        return redirectRegUrl;
+        model.addAttribute("errors", errors);
+        return "reg";
       }
     } else {
       //效验出错回到注册页面
       Map<String, String> errors = new HashMap<>();
-      log.debug("验证码不存在");
-      log.debug("code not ex");
+      log.info("验证码不存在");
+      log.info("code not ex");
       errors.put("code", "验证码不存在");
-      attributes.addFlashAttribute("errors", errors);
-      return redirectRegUrl;
+      model.addAttribute("errors", errors);
+      return "reg";
     }
   }
 
@@ -188,7 +199,7 @@ public class LoginController {
         } else {
             Map<String,String> errors = new HashMap<>();
             errors.put("msg",login.getData("msg",new TypeReference<String>(){}));
-            attributes.addFlashAttribute("errors",errors);
+            model.addAttribute("errors",errors);
             return "redirect:http://auth.gulimall.com/login.html";
         }
     }
