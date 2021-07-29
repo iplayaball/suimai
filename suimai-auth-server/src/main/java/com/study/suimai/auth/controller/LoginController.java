@@ -3,6 +3,7 @@ package com.study.suimai.auth.controller;
 import com.study.common.constant.AuthServerConstant;
 import com.study.common.exception.BizCodeEnum;
 import com.study.common.utils.R;
+import com.study.suimai.auth.feign.ThirdPartFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -17,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class LoginController {
 
-//    @Autowired
-//    private ThirdPartFeignService thirdPartFeignService;
+  @Autowired
+  private ThirdPartFeignService thirdPartFeignService;
 
   @Autowired
   private StringRedisTemplate stringRedisTemplate;
@@ -48,8 +49,8 @@ public class LoginController {
     stringRedisTemplate.opsForValue().set(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone,
      redisStorage, 10, TimeUnit.MINUTES);
 
-//        thirdPartFeignService.sendCode(phone, codeNum);
-    System.out.printf("%s:%s", phone, code);
+    thirdPartFeignService.sendCode(phone, codeNum);
+//    System.out.printf("%s:%s", phone, code);
     System.out.println();
 
     return R.ok();
