@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,17 +82,19 @@ public class LoginController {
    */
   @PostMapping(value = "/register")
   public String register(@Valid UserRegisterVo vos, BindingResult result,
-                         RedirectAttributes attributes,
-                         HttpServletRequest request) {
+                         RedirectAttributes attributes) {
 
     String url;
 //    url = request.getScheme() + "://"
 //     + request.getServerName() + ":"
 //     + request.getServerPort()
 //     + request.getServletPath();
-    url = request.getScheme() + "://"
-     + request.getServerName()
+//    url = request.getScheme() + "://"
+//     + request.getServerName()
+//     + "/auth/";
+    url = "https://8089-cs-629891519430-default.cs-asia-east1-jnrc.cloudshell.dev"
      + "/auth/";
+
     String redirectRegUrl = "redirect:" + url + "reg.html";
     String redirectLoginUrl = "redirect:" + url + "login.html";
 
@@ -145,7 +146,7 @@ public class LoginController {
     } else {
       //效验出错回到注册页面
       Map<String, String> errors = new HashMap<>();
-      errors.put("code", "验证码错误");
+      errors.put("code", "验证码不存在");
       attributes.addFlashAttribute("errors", errors);
       return redirectRegUrl;
     }
