@@ -21,6 +21,7 @@
 		<module>suimai-third-party</module>
 		<module>suimai-search</module>
 		<module>suimai-auth-server</module>
+		<module>member</module>
     </modules>
 
 </project>
