@@ -3,6 +3,7 @@ package com.study.suimai.member.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.study.common.utils.PageUtils;
 import com.study.suimai.member.entity.MemberEntity;
+import com.study.suimai.member.vo.MemberUserLoginVo;
 import com.study.suimai.member.vo.MemberUserRegisterVo;
 
 import java.util.Map;
@@ -19,5 +20,7 @@ public interface MemberService extends IService<MemberEntity> {
   PageUtils queryPage(Map<String, Object> params);
 
   void register(MemberUserRegisterVo vo);
+
+  MemberEntity login(MemberUserLoginVo vo);
 }
 

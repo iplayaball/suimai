@@ -6,6 +6,7 @@ import com.study.common.exception.BizCodeEnum;
 import com.study.common.utils.R;
 import com.study.suimai.auth.feign.MemberFeignService;
 import com.study.suimai.auth.feign.ThirdPartFeignService;
+import com.study.suimai.auth.vo.UserLoginVo;
 import com.study.suimai.auth.vo.UserRegisterVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -170,41 +173,42 @@ public class LoginController {
     }
   }
 
+  /*
+      @GetMapping(value = "/login.html")
+      public String loginPage(HttpSession session) {
+
+          //从session先取出来用户的信息，判断用户是否已经登录过了
+          Object attribute = session.getAttribute(LOGIN_USER);
+          //如果用户没登录那就跳转到登录页面
+          if (attribute == null) {
+              return "login";
+          } else {
+              return "redirect:http://gulimall.com";
+          }
+
+      }
+
+  */
+  @PostMapping(value = "/login")
+  public String login(UserLoginVo vo, RedirectAttributes attributes, HttpSession session) {
+    //远程登录
+    R login = memberFeignService.login(vo);
+
+    if (login.getCode() == 0) {
+      /*MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {
+      });
+      session.setAttribute(LOGIN_USER, data);*/
+      return "redirect:https://8089-cs-252558529935-default.cs-asia-east1-jnrc.cloudshell.dev/";
+    } else {
+      Map<String, String> errors = new HashMap<>();
+      errors.put("msg", login.getData("msg", new TypeReference<String>() {
+      }));
+      attributes.addFlashAttribute("errors", errors);
+      return "redirect:https://8089-cs-252558529935-default.cs-asia-east1-jnrc.cloudshell.dev/auth/login.html";
+    }
+  }
+
 /*
-    @GetMapping(value = "/login.html")
-    public String loginPage(HttpSession session) {
-
-        //从session先取出来用户的信息，判断用户是否已经登录过了
-        Object attribute = session.getAttribute(LOGIN_USER);
-        //如果用户没登录那就跳转到登录页面
-        if (attribute == null) {
-            return "login";
-        } else {
-            return "redirect:http://gulimall.com";
-        }
-
-    }
-
-
-    @PostMapping(value = "/login")
-    public String login(UserLoginVo vo, RedirectAttributes attributes, HttpSession session) {
-
-        //远程登录
-        R login = memberFeignService.login(vo);
-
-        if (login.getCode() == 0) {
-            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {});
-            session.setAttribute(LOGIN_USER,data);
-            return "redirect:http://gulimall.com";
-        } else {
-            Map<String,String> errors = new HashMap<>();
-            errors.put("msg",login.getData("msg",new TypeReference<String>(){}));
-            model.addAttribute("errors",errors);
-            return "redirect:http://auth.gulimall.com/login.html";
-        }
-    }
-
-
     @GetMapping(value = "/loguot.html")
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute(LOGIN_USER);
