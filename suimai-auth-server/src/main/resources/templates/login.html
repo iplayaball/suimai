@@ -12,14 +12,14 @@
 	<a href="/"><img src="/static/login/JD_img/logo.jpg"/></a>
 	<p>欢迎登录</p>
 	<div class="top-1">
-		<img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_06.png"/><span>登录页面,调查问卷</span>
+<!--		<img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_06.png"/><span>登录页面,调查问卷</span>-->
 	</div>
 </header>
 
 <div class="top-2">
 	<div class="top-2a">
-		<img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_11.png"/>
-		<p>依据《网络安全法》，为保障您的账户安全和正常使用，请尽快完成手机号验证！新版《<span>穗麦商城隐私政策</span>》已上线，将更有利于保护您的个人隐私。</p>
+		<!--<img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_11.png"/>
+		<p>依据《网络安全法》，为保障您的账户安全和正常使用，请尽快完成手机号验证！新版《<span>穗麦商城隐私政策</span>》已上线，将更有利于保护您的个人隐私。</p>-->
 	</div>
 </div>
 
@@ -31,17 +31,16 @@
 	<div id="sign">
 		<div class="si_top">
 			<p>
-				<span>穗麦商城不会以任何理由要求您转账汇款，谨防诈骗。</span>
 				<span style="color: red" th:if="session.msg!=null"><br/>[[${session.msg}]]</span>
 			</p>
 
 		</div>
 		<div class="si_cen">
-			<h2 class="act btn1">扫码登录</h2>
-			<span>|</span>
+			<!--<h2 class="act btn1">扫码登录</h2>
+			<span>|</span>-->
 			<h2 class="btn1">账户登录</h2>
 		</div>
-		<div class="si_bom tab">
+		<!--<div class="si_bom tab">
 			<img src="/static/login/JD_img/show.png" class="bom_1"/>
 			<a><img src="/static/login/JD_img/phone-orange.png" class="bom_2"/></a>
 			<h6>打开<span class="red">手机穗麦商城</span> 扫描二维码</h6>
@@ -53,13 +52,14 @@
 				<img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_19.png"/>
 				<span><a>更安全</a></span>
 			</p>
-		</div>
+		</div>-->
 		<div class="si_bom1 tab" style="display: none;">
 			<div class="error">
 				<div></div>
 				请输入账户名和密码
 			</div>
-			<form action="/login" method="post">
+
+			<form id="loginForm">
 				<div style="color: red"
 				     th:text="${errors != null ? (#maps.containsKey(errors, 'msg') ? errors.msg : '') : ''}"></div>
 				<ul>
@@ -71,14 +71,18 @@
 						<img src="/static/login/JD_img/user_06.png" class="err_img2"/>
 						<input type="password" name="password" placeholder=" 密码" class="password"/>
 					</li>
-					<li class="bri">
-						<a>忘记密码</a>
-					</li>
-					<li class="ent">
-						<button class="btn2" type="submit">登 &nbsp; &nbsp;录</a></button>
-					</li>
 				</ul>
 			</form>
+
+			<ul>
+				<li class="bri">
+					<a>忘记密码</a>
+				</li>
+				<li class="ent">
+					<button id="submitBtn" class="btn2">登 &nbsp; &nbsp;录</button>
+				</li>
+			</ul>
+
 		</div>
 		<div class="si_out">
 			<ul>
@@ -137,6 +141,45 @@
 
 </body>
 <script type="text/javascript">
+$(function() {
+	$("#submitBtn").on("click", function() {
+		let formData = $("#loginForm").serializeObject()
+		formData = JSON.stringify(formData)
+		console.log(formData)
+		$.ajax({
+			type: "post",
+			url: "/auth/login",
+			data: formData, // 序列化form表单里面的数据传到后台
+			contentType: "application/json",
+			dataType: "json", // 指定后台传过来的数据是json格式
+			success: function(data){
+				console.log("登录成功")
+			},
+			error: function(err){
+				console.log("数据异常！");
+			}
+		})
+	})
+});
+$.fn.serializeObject = function()
+{
+  var o = {};
+  var a = this.serializeArray();
+  $.each(a, function() {
+   if (o[this.name]) {
+    if (!o[this.name].push) {
+     o[this.name] = [o[this.name]];
+    }
+    o[this.name].push(this.value || '');
+   } else {
+    o[this.name] = this.value || '';
+   }
+  });
+  return o;
+};
+</script>
+
+<script type="text/javascript">
     var alDiv = document.getElementsByClassName('tab');
     var alBtn = document.getElementsByTagName('h2');
     alDiv[0].style.display = 'block';
@@ -159,7 +202,7 @@
     var err_img1 = document.getElementsByClassName('err_img1')[0];
     var err_img2 = document.getElementsByClassName('err_img2')[0];
 
-    btn2.onclick = function () {
+    /* btn2.onclick = function () {
         if (user.value == '' || pass.value == '') {
             err.style.display = 'block';
             user.style.border = '1px solid red';
@@ -185,7 +228,8 @@
             err_img2.src = 'JD_img/img22.png';
             pass.style.border = '1px solid red';
         }
-    }
+    } */
+
 
 </script>
 </html>

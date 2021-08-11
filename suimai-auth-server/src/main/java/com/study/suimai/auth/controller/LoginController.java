@@ -39,7 +39,7 @@ public class LoginController {
 
   @ResponseBody
   @GetMapping(value = "/sms/sendCode")
-  public R sendCode(@RequestParam("phone") String phone) {
+  public R sendCodede(@RequestParam("phone") String phone) {
 
     //1、接口防刷
     String redisCode = stringRedisTemplate.opsForValue().get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone);
