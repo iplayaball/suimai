@@ -15,13 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -189,15 +184,15 @@ public class LoginController {
       }
 
   */
-  @PostMapping(value = "/login")
+  /*@PostMapping(value = "/login")
   public String login(UserLoginVo vo, RedirectAttributes attributes, HttpSession session) {
     //远程登录
     R login = memberFeignService.login(vo);
 
     if (login.getCode() == 0) {
-      /*MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {
+      *//*MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {
       });
-      session.setAttribute(LOGIN_USER, data);*/
+      session.setAttribute(LOGIN_USER, data);*//*
       return "redirect:https://8089-cs-252558529935-default.cs-asia-east1-jnrc.cloudshell.dev/";
     } else {
       Map<String, String> errors = new HashMap<>();
@@ -205,6 +200,25 @@ public class LoginController {
       }));
       attributes.addFlashAttribute("errors", errors);
       return "redirect:https://8089-cs-252558529935-default.cs-asia-east1-jnrc.cloudshell.dev/auth/login.html";
+    }
+  }*/
+
+  @ResponseBody
+  @PostMapping(value = "/login")
+  public R login(@RequestBody  UserLoginVo vo) {
+    //远程登录
+    R login = memberFeignService.login(vo);
+
+    if (login.getCode() == 0) {
+      /*MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {
+      });
+      session.setAttribute(LOGIN_USER, data);*/
+      return R.ok();
+    } else {
+      Map<String, String> errors = new HashMap<>();
+      errors.put("msg", login.getData("msg", new TypeReference<String>() {
+      }));
+      return R.error();
     }
   }
 
