@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.18.0.1:8848
+        ip: 172.18.0.1
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://172.18.0.1:3306/suimai_ums?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
