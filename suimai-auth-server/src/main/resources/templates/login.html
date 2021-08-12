@@ -154,6 +154,7 @@ $(function() {
 			dataType: "json", // 指定后台传过来的数据是json格式
 			success: function(data){
 				console.log("登录成功")
+				window.location.href = "/";
 			},
 			error: function(err){
 				console.log("数据异常！");

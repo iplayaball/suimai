@@ -215,10 +215,7 @@ public class LoginController {
       session.setAttribute(LOGIN_USER, data);*/
       return R.ok();
     } else {
-      Map<String, String> errors = new HashMap<>();
-      errors.put("msg", login.getData("msg", new TypeReference<String>() {
-      }));
-      return R.error();
+      return R.error().put("msg", login.getData("msg", new TypeReference<String>() {}));
     }
   }
 
