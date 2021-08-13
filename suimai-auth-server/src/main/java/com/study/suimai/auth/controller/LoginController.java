@@ -4,6 +4,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.study.common.constant.AuthServerConstant;
 import com.study.common.exception.BizCodeEnum;
 import com.study.common.utils.R;
+import com.study.common.vo.MemberResponseVo;
 import com.study.suimai.auth.feign.MemberFeignService;
 import com.study.suimai.auth.feign.ThirdPartFeignService;
 import com.study.suimai.auth.vo.UserLoginVo;
@@ -17,10 +18,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import static com.study.common.constant.AuthServerConstant.LOGIN_USER;
 
 
 @Slf4j
@@ -39,7 +43,7 @@ public class LoginController {
 
   @ResponseBody
   @GetMapping(value = "/sms/sendCode")
-  public R sendCode(@RequestParam("phone") String phone) {
+  public R sendCodede(@RequestParam("phone") String phone) {
 
     //1、接口防刷
     String redisCode = stringRedisTemplate.opsForValue().get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone);
@@ -205,20 +209,17 @@ public class LoginController {
 
   @ResponseBody
   @PostMapping(value = "/login")
-  public R login(@RequestBody  UserLoginVo vo) {
+  public R login(@RequestBody  UserLoginVo vo, HttpSession session) {
     //远程登录
     R login = memberFeignService.login(vo);
 
     if (login.getCode() == 0) {
-      /*MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {
+      MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {
       });
-      session.setAttribute(LOGIN_USER, data);*/
+      session.setAttribute(LOGIN_USER, data);
       return R.ok();
     } else {
-      Map<String, String> errors = new HashMap<>();
-      errors.put("msg", login.getData("msg", new TypeReference<String>() {
-      }));
-      return R.error();
+      return R.error().put("msg", login.getData("msg", new TypeReference<String>() {}));
     }
   }
 
