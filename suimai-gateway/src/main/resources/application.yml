@@ -36,14 +36,7 @@ spring:
             - Path=/api/thirdparty/**
           filters:
             - RewritePath=/api/thirdparty/(?<segment>.*),/$\{segment}
-        #
-        #        - id: member_route
-        #          uri: lb://suimai-member
-        #          predicates:
-        #            - Path=/api/member/**
-        #          filters:
-        #            - RewritePath=/api/(?<segment>.*),/$\{segment}
-        #
+
         - id: ware_route
           uri: lb://suimai-ware
           predicates:
@@ -72,11 +65,14 @@ spring:
           filters:
             - RewritePath=/auth/(?<segment>.*),/$\{segment}
 
+        - id: cart_route
+          uri: lb://suimai-cart
+          predicates:
+            - Path=/cart/**
+          filters:
+            - RewritePath=/cart/(?<segment>.*),/$\{segment}
+
         - id: user_route
           uri: lb://product
           predicates:
             - Path=/**
-
-  ## 前端项目，/api
-## http://localhost:88/api/captcha.jpg   http://localhost:8080/renren-fast/captcha.jpg
-## http://localhost:88/api/product/category/list/tree http://localhost:10000/product/category/list/tree

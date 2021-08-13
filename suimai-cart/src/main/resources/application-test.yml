@@ -1,12 +1,9 @@
-server:
-  port: 8888
 spring:
-  application:
-    name: suimai-gateway
-  jackson:
-    time-zone: GMT+08
   cloud:
     nacos:
       discovery:
         server-addr: 172.18.0.1:8848
         ip: 172.18.0.1
+  redis:
+    host: 172.18.0.1
+    port: 6379
