@@ -20,3 +20,9 @@ spring:
     cache: false
   session:
     store-type: redis
+
+suimai:
+  thread:
+    coreSize: 20
+    maxSize: 200
+    keepAliveTime: 10

@@ -1,16 +1,24 @@
 package com.study.suimai.cart.controller;
 
 import com.study.suimai.cart.interceptor.CartInterceptor;
+import com.study.suimai.cart.service.CartService;
 import com.study.suimai.cart.to.UserInfoTo;
+import com.study.suimai.cart.vo.CartItemVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import java.util.concurrent.ExecutionException;
 
 
 @Controller
 public class CartController {
+
+  @Resource
+  private CartService cartService;
 
   /**
    * 去购物车页面的请求
@@ -34,8 +42,23 @@ public class CartController {
     return "cartList";
   }
 
-  @GetMapping(value = "/addToCart")
-  public String addToCart(){
+  /**
+   * 添加商品到购物车
+   * attributes.addFlashAttribute():将数据放在session中，可以在页面中取出，但是只能取一次
+   * attributes.addAttribute():将数据放在url后面
+   * @return
+   */
+  @GetMapping(value = "/addCartItem")
+  public String addCartItem(@RequestParam("skuId") Long skuId,
+                            @RequestParam("num") Integer num,
+                            Model model,
+                            RedirectAttributes attributes) throws ExecutionException, InterruptedException {
+
+    CartItemVo cartItemVo = cartService.addToCart(skuId,num);
+
+    model.addAttribute("cartItem",cartItemVo);
+//    attributes.addAttribute("skuId",skuId);
+//    return "redirect:http://cart.gulimall.com/addToCartSuccessPage.html";
     return "success";
   }
 }

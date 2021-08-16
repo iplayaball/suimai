@@ -4,113 +4,111 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品详情页</title>
-	<link rel="stylesheet" type="text/css" href="/static/item/scss/shop.css"/>
-	<link rel="stylesheet" type="text/css" href="/static/item/scss/jd.css"/>
-	<link rel="stylesheet" href="/static/item/scss/header.css"/>
-	<link rel="stylesheet" type="text/css" href="/static/item/bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/item/scss/shop.css" />
+	<link rel="stylesheet" type="text/css" href="/static/item/scss/jd.css" />
+	<link rel="stylesheet" href="/static/item/scss/header.css" />
+	<link rel="stylesheet" type="text/css" href="/static/item/bootstrap/css/bootstrap.css" />
 </head>
+
 <body>
-<div id="max">
-	<header>
-		<!--品牌官方网站-->
-		<div class="min">
-			<ul class="header_ul_left">
-				<li class="glyphicon glyphicon-home"><a href="/" class="aa">首页</a></li>
-			</ul>
-			`
-			<ul class="header_ul_right">
-				<li style="border: 0;">
-					<a th:if="${session.loginUser == null}" href="/auth/login.html"
-					   class="aa">你好，请登录</a>
-					<a th:if="${session.loginUser != null}">欢迎, [[${session.loginUser.nickname}]]</a>
-				</li>
-				<li>
-					<a th:if="${session.loginUser == null}" href="/auth/reg.html"
-					   style="color: red;">免费注册</a>
-				</li>
-				<li><a href="/member/memberOrder.html" class="aa">我的订单</a> |</li>
-			</ul>
-		</div>
-	</header>
-	<nav>
-		<div class="nav_min">
-			<div class="nav_top">
-				<!--				<div class="nav_top_one"><a href="/"><img src="/static/item/img/111.png"/></a></div>-->
-				<div class="nav_top_two"><input type="text"/>
-					<button>搜索</button>
-				</div>
-				<div class="nav_top_three"><a href="/cart/cart.html">我的购物车</a><span
-						class="glyphicon glyphicon-shopping-cart"></span>
-					<div class="nav_top_three_1">
-						<img src="/static/item/img/44.png"/>购物车还没有商品，赶紧选购吧！
+	<div id="max">
+		<header>
+			<!--品牌官方网站-->
+			<div class="min">
+				<ul class="header_ul_left">
+					<li class="glyphicon glyphicon-home"><a href="/" class="aa">首页</a></li>
+				</ul>
+				`
+				<ul class="header_ul_right">
+					<li style="border: 0;">
+						<a th:if="${session.loginUser == null}" href="/auth/login.html" class="aa">你好，请登录</a>
+						<a th:if="${session.loginUser != null}">欢迎, [[${session.loginUser.nickname}]]</a>
+					</li>
+					<li>
+						<a th:if="${session.loginUser == null}" href="/auth/reg.html" style="color: red;">免费注册</a>
+					</li>
+					<li><a href="/member/memberOrder.html" class="aa">我的订单</a> |</li>
+				</ul>
+			</div>
+		</header>
+		<nav>
+			<div class="nav_min">
+				<div class="nav_top">
+					<!--				<div class="nav_top_one"><a href="/"><img src="/static/item/img/111.png"/></a></div>-->
+					<div class="nav_top_two"><input type="text" />
+						<button>搜索</button>
+					</div>
+					<div class="nav_top_three"><a href="/cart/cart.html">我的购物车</a><span
+							class="glyphicon glyphicon-shopping-cart"></span>
+						<div class="nav_top_three_1">
+							<img src="/static/item/img/44.png" />购物车还没有商品，赶紧选购吧！
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
 
-</div>
+	</div>
 
 
-<div class="crumb-wrap">
-</div>
-<div class="Shop">
-	<div class="box">
-		<div class="box-one ">
-			<div class="boxx">
+	<div class="crumb-wrap">
+	</div>
+	<div class="Shop">
+		<div class="box">
+			<div class="box-one ">
+				<div class="boxx">
 
-				<div class="imgbox">
-					<div class="probox">
-						<img class="img1" alt="" th:src="${item.info.skuDefaultImg}">
-						<div class="hoverbox"></div>
-					</div>
-					<div class="showbox">
-						<img class="img1" alt="" th:src="${item.info.skuDefaultImg}">
-					</div>
-				</div>
-
-				<div class="box-lh">
-
-					<div class="box-lh-one">
-						<ul>
-							<li th:each="img : ${item.images}"><img th:src="${img.imgUrl}"/></li>
-						</ul>
-					</div>
-					<div id="left">
-						<
-					</div>
-					<div id="right">
-						>
+					<div class="imgbox">
+						<div class="probox">
+							<img class="img1" alt="" th:src="${item.info.skuDefaultImg}">
+							<div class="hoverbox"></div>
+						</div>
+						<div class="showbox">
+							<img class="img1" alt="" th:src="${item.info.skuDefaultImg}">
+						</div>
 					</div>
 
-				</div>
+					<div class="box-lh">
 
-				<div class="boxx-one">
-					<ul>
-						<li>
+						<div class="box-lh-one">
+							<ul>
+								<li th:each="img : ${item.images}"><img th:src="${img.imgUrl}" /></li>
+							</ul>
+						</div>
+						<div id="left">
+							< </div>
+								<div id="right">
+									>
+								</div>
+
+						</div>
+
+						<div class="boxx-one">
+							<ul>
+								<li>
 									<span>
-										<img src="/static/item/img/b769782fe4ecca40913ad375a71cb92d.png" alt=""/>关注
+										<img src="/static/item/img/b769782fe4ecca40913ad375a71cb92d.png" alt="" />关注
 									</span>
-							<span>
-										<img src="/static/item/img/9224fcea62bfff479a6712ba3a6b47cc.png" alt=""/>
+									<span>
+										<img src="/static/item/img/9224fcea62bfff479a6712ba3a6b47cc.png" alt="" />
 										对比
 									</span>
-						</li>
-						<li>
+								</li>
+								<li>
 
-						</li>
-					</ul>
-				</div>
+								</li>
+							</ul>
+						</div>
 
-			</div>
-			<div class="box-two">
-				<div class="box-name" th:text="${item.info.skuTitle}">
-					华为 HUAWEI Mate 10 6GB+128GB 亮黑色 移动联通电信4G手机 双卡双待
-				</div>
-				<div class="box-hide" th:text="${item.info.skuSubtitle}">预订用户预计11月30日左右陆续发货！麒麟970芯片！AI智能拍照！
-					<a href="/static/item/"><u></u></a>
-				</div>
-				<!--<div class="box-yuyue">
+					</div>
+					<div class="box-two">
+						<div class="box-name" th:text="${item.info.skuTitle}">
+							华为 HUAWEI Mate 10 6GB+128GB 亮黑色 移动联通电信4G手机 双卡双待
+						</div>
+						<div class="box-hide" th:text="${item.info.skuSubtitle}">预订用户预计11月30日左右陆续发货！麒麟970芯片！AI智能拍照！
+							<a href="/static/item/"><u></u></a>
+						</div>
+						<!--<div class="box-yuyue">
 					<div class="yuyue-one">
 						<img src="/static/item/img/7270ffc3baecdd448958f9f5e69cf60f.png" alt=""/> 预约抢购
 					</div>
@@ -129,21 +127,21 @@
 						</ul>
 					</div>
 				</div>-->
-				<div class="box-summary clear">
-					<ul>
-						<li>京东价</li>
-						<li>
-							<span>￥</span>
-							<span th:text="${#numbers.formatDecimal(item.info.price,3,2)}">4499.00</span>
-						</li>
-						<!--<li>
+						<div class="box-summary clear">
+							<ul>
+								<li>京东价</li>
+								<li>
+									<span>￥</span>
+									<span th:text="${#numbers.formatDecimal(item.info.price,3,2)}">4499.00</span>
+								</li>
+								<!--<li>
 							<a href="/static/item/">
 								预约说明
 							</a>
 						</li>-->
-					</ul>
-				</div>
-				<!--<div class="box-wrap clear">
+							</ul>
+						</div>
+						<!--<div class="box-wrap clear">
 					<div class="box-wrap-one clear">
 						<ul>
 							<li>增值业务</li>
@@ -154,10 +152,10 @@
 					</div>
 				</div>-->
 
-				<div class="box-stock">
-					<ul class="box-ul">
-						<li>配送至</li>
-						<!--<li class="box-stock-li">
+						<div class="box-stock">
+							<ul class="box-ul">
+								<li>配送至</li>
+								<!--<li class="box-stock-li">
 							<div class="box-stock-one">
 								北京朝阳区管庄
 								<img src="/static/item/img/4a79b87a68623d4e8a73aff3e25fa99b.png" alt="" class="img"/>
@@ -209,12 +207,12 @@
 							</div>
 
 						</li>-->
-						<li>
-							<span th:text="${item.hasStock?'有货':'无货'}">无货</span>
-						</li>
-					</ul>
-				</div>
-				<!--<div class="box-supply">
+								<li>
+									<span th:text="${item.hasStock?'有货':'无货'}">无货</span>
+								</li>
+							</ul>
+						</div>
+						<!--<div class="box-supply">
 					<ul class="box-ul">
 						<li></li>
 						<li>
@@ -222,54 +220,53 @@
 						</li>
 					</ul>
 				</div>-->
-				<div class="box-attr-3">
-					<div class="box-attr clear" th:each="attr : ${item.saleAttr}">
-						<dl>
-							<dt>选择[[${attr.attrName}]]</dt>
-							<dd th:each="val : ${attr.attrValues}">
-								<a th:attr=" class=${#lists.contains(#strings.listSplit(val.skuIds,','),item.info.skuId.toString())
-                                   ? 'sku_attr_value checked': 'sku_attr_value'}, skus=${val.skuIds} "
-								>
-									[[${val.attrValue}]]
-									<!--											<img src="/static/item/img/59ddfcb1Nc3edb8f1.jpg" /> -->
-								</a>
-							</dd>
-						</dl>
-					</div>
-				</div>
-
-				<div class="box-btns clear">
-					<div class="box-btns-one">
-						<input type="text" name="" id="productNum" value="1"/>
-						<div class="box-btns-one1">
-
-							<div>
-								<button id="jia">
-									+
-								</button>
+						<div class="box-attr-3">
+							<div class="box-attr clear" th:each="attr : ${item.saleAttr}">
+								<dl>
+									<dt>选择[[${attr.attrName}]]</dt>
+									<dd th:each="val : ${attr.attrValues}">
+										<a th:attr=" class=${#lists.contains(#strings.listSplit(val.skuIds,','),item.info.skuId.toString())
+                                   ? 'sku_attr_value checked': 'sku_attr_value'}, skus=${val.skuIds} ">
+											[[${val.attrValue}]]
+											<!--											<img src="/static/item/img/59ddfcb1Nc3edb8f1.jpg" /> -->
+										</a>
+									</dd>
+								</dl>
 							</div>
-							<div>
-								<button id="jian">
-									-
-								</button>
-							</div>
-
 						</div>
-					</div>
 
-					<div class="box-btns-two">
-						<a class="addToCart" href="/cart/addToCart" th:attr="skuId=${item.info.skuId}">
-							加入购物车
-						</a>
-					</div>
+						<div class="box-btns clear">
+							<div class="box-btns-one">
+								<input type="text" name="" id="productNum" value="1" />
+								<div class="box-btns-one1">
+
+									<div>
+										<button id="jia">
+											+
+										</button>
+									</div>
+									<div>
+										<button id="jian">
+											-
+										</button>
+									</div>
+
+								</div>
+							</div>
+
+							<div class="box-btns-two">
+								<a class="addToCart" href="/cart/addToCart" th:attr="skuId=${item.info.skuId}">
+									加入购物车
+								</a>
+							</div>
 
 
-					<div class="box-btns-three">
-						<img src="/static/item/img/e4ed3606843f664591ff1f68f7fda12d.png" alt=""/> 分享
-					</div>
-				</div>
+							<div class="box-btns-three">
+								<img src="/static/item/img/e4ed3606843f664591ff1f68f7fda12d.png" alt="" /> 分享
+							</div>
+						</div>
 
-				<!--<div class="box-footer-zo">
+						<!--<div class="box-footer-zo">
 					<div class="box-footer clear">
 						<dl>
 							<dt>本地活动</dt>
@@ -289,22 +286,22 @@
 						</dl>
 					</div>
 				</div>-->
+					</div>
+
+				</div>
 			</div>
 
-		</div>
-	</div>
-
-	<div class="ShopXiangqing">
-		<!--商品介绍-->
-		<div class="allquanbushop">
-			<ul class="shopjieshao">
-				<li class="jieshoa" style="background: #e4393c;">
-					<a style="color: white;">商品介绍</a>
-				</li>
-				<li class="baozhuang">
-					<a>规格与包装</a>
-				</li>
-				<!--<li class="baozhang">
+			<div class="ShopXiangqing">
+				<!--商品介绍-->
+				<div class="allquanbushop">
+					<ul class="shopjieshao">
+						<li class="jieshoa" style="background: #e4393c;">
+							<a style="color: white;">商品介绍</a>
+						</li>
+						<li class="baozhuang">
+							<a>规格与包装</a>
+						</li>
+						<!--<li class="baozhang">
 					<a href="#">售后保障</a>
 				</li>
 				<li class="pingjia">
@@ -314,159 +311,159 @@
 					<a href="#">预约说明</a>
 				</li>-->
 
-			</ul>
-			<!--<button class="Lijiyuyuessss">
+					</ul>
+					<!--<button class="Lijiyuyuessss">
 				立即预约
 			</button>-->
-			<ul class="shopjieshaos posi" style="display: none;">
-				<li class="jieshoa" style="background: #e4393c;">
-					<a style="color: white;">商品介绍</a>
-				</li>
-				<li class="baozhuang">
-					<a>规格与包装</a>
-				</li>
-			</ul>
+					<ul class="shopjieshaos posi" style="display: none;">
+						<li class="jieshoa" style="background: #e4393c;">
+							<a style="color: white;">商品介绍</a>
+						</li>
+						<li class="baozhuang">
+							<a>规格与包装</a>
+						</li>
+					</ul>
 
-			<!--商品详情-->
-			<div class="huawei">
-				<ul class="xuanxiangka">
-					<li class="jieshoa actives" id="li1">
-						<div class="shanpinsssss">
-							<img class="xiaoguo" th:src="${descp}"
-							     th:each="descp : ${#strings.listSplit(item.desc.decript,',')}"/>
-						</div>
-					</li>
-					<!--					<li class="baozhuang actives" id="li2">-->
-					<li class="baozhuang actives" id="li2">
-						<div class="guiGebox">
-							<div class="guiGe" th:each="group : ${item.groupAttrs}">
-								<h3 th:text="${group.groupName}">主体</h3>
-								<dl>
-									<div th:each="attr : ${group.attrs}">
-										<dt th:text="${attr.attrName}">品牌</dt>
-										<dd th:text="${attr.attrValue}">华为(HUAWEI)</dd>
+					<!--商品详情-->
+					<div class="huawei">
+						<ul class="xuanxiangka">
+							<li class="jieshoa actives" id="li1">
+								<div class="shanpinsssss">
+									<img class="xiaoguo" th:src="${descp}"
+										th:each="descp : ${#strings.listSplit(item.desc.decript,',')}" />
+								</div>
+							</li>
+							<!--					<li class="baozhuang actives" id="li2">-->
+							<li class="baozhuang actives" id="li2">
+								<div class="guiGebox">
+									<div class="guiGe" th:each="group : ${item.groupAttrs}">
+										<h3 th:text="${group.groupName}">主体</h3>
+										<dl>
+											<div th:each="attr : ${group.attrs}">
+												<dt th:text="${attr.attrName}">品牌</dt>
+												<dd th:text="${attr.attrValue}">华为(HUAWEI)</dd>
+											</div>
+										</dl>
 									</div>
-								</dl>
-							</div>
-							<!--<div class="package-list">
+									<!--<div class="package-list">
 								<h3>包装清单</h3>
 								<p>手机（含内置电池） X 1、5A大电流华为SuperCharge充电器X 1、5A USB数据线 X 1、半入耳式线控耳机 X 1、快速指南X 1、三包凭证 X
 									1、取卡针 X 1、保护壳 X 1</p>
 							</div>-->
-						</div>
-					</li>
-					<!--包装-->
-				</ul>
+								</div>
+							</li>
+							<!--包装-->
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<div class="headera">
-	<!--关于我们-->
-	<div class="guanyuwomen">
-		<ul>
-			<li>
-				<a href="#">关于我们</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">联系我们</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">联系客服</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">合作招商</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">商家帮助</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">营销中心</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">手机京东</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">友情链接</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">销售联盟</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">京东社区</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">风险检测</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">隐私政策</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">京东公益</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">English Site</a>
-			</li>
-			<li>|</li>
-			<li>
-				<a href="#">Mdeila $ IR</a>
-			</li>
-		</ul>
-	</div>
-	<!--jieshoa-->
-	<p class="p1"><img src="/static/item/img/56a0a994Nf1b662dc.png"/>
-		<a href="#"> 京公网安备 11000002000088号</a>|
-		<a href="#"> 京ICP证070359号</a>|
-		<a href="#"> 互联网药品信息服务资格证编号(京)-经营性-2014-0008 </a>|
-		<a href="#">新出发京零 字第大120007号</a>
-	</p>
-	<p class="p1">
-		<a href="#"> 互联网出版许可证编号新出网证(京)字150号</a>|
-		<a href="#"> 出版物经营许可证</a>|
-		<a href="#"> 网络文化经营许可证京网文 </a>|
-		<a href="#">[2014]2148-348号 </a>|
-		<a href="#"> 违法和不良信息举报电话 </a>|
-		<a href="#">：4006561155 </a>
-	</p>
-	<p class="p1">
-		<a href="#"> Copyright © 2004-2017 京东JD.com 版权所有</a>|
-		<a href="#"> 消费者维权热线：4006067733 经营证照</a>|
-	</p>
-	<p class="p1">
-		<a href="#"> 京东旗下网站：京东支付</a>|
-		<a href="#"> 京东云</a>
-	</p>
-	<p class="p3">
-		<img src="/static/item/img/54b8871eNa9a7067e.png"/>
-		<img src="/static/item/img/54b8872dNe37a9860.png"/>
-		<img src="/static/item/img/54b8875fNad1e0c4c.png"/>
-		<img src="/static/item/img/5698dc03N23f2e3b8.jpg"/>
-		<img src="/static/item/img/5698dc16Nb2ab99df.jpg"/>
-		<img src="/static/item/img/56a89b8fNfbaade9a.jpg"/>
-	</p>
-</div>
-<div class="Fixedbian">
-	<ul>
-		<li class="li1"><a class="aaa" href="#">顶部</a></li>
-	</ul>
-</div>
-<div class="gouwuchexiaguo">
-	<img src="/static/item/img/44.png"/>
-	<span>购物车还没有商品，赶紧选购吧！</span>
-</div>
+		<div class="headera">
+			<!--关于我们-->
+			<div class="guanyuwomen">
+				<ul>
+					<li>
+						<a href="#">关于我们</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">联系我们</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">联系客服</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">合作招商</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">商家帮助</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">营销中心</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">手机京东</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">友情链接</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">销售联盟</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">京东社区</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">风险检测</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">隐私政策</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">京东公益</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">English Site</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">Mdeila $ IR</a>
+					</li>
+				</ul>
+			</div>
+			<!--jieshoa-->
+			<p class="p1"><img src="/static/item/img/56a0a994Nf1b662dc.png" />
+				<a href="#"> 京公网安备 11000002000088号</a>|
+				<a href="#"> 京ICP证070359号</a>|
+				<a href="#"> 互联网药品信息服务资格证编号(京)-经营性-2014-0008 </a>|
+				<a href="#">新出发京零 字第大120007号</a>
+			</p>
+			<p class="p1">
+				<a href="#"> 互联网出版许可证编号新出网证(京)字150号</a>|
+				<a href="#"> 出版物经营许可证</a>|
+				<a href="#"> 网络文化经营许可证京网文 </a>|
+				<a href="#">[2014]2148-348号 </a>|
+				<a href="#"> 违法和不良信息举报电话 </a>|
+				<a href="#">：4006561155 </a>
+			</p>
+			<p class="p1">
+				<a href="#"> Copyright © 2004-2017 京东JD.com 版权所有</a>|
+				<a href="#"> 消费者维权热线：4006067733 经营证照</a>|
+			</p>
+			<p class="p1">
+				<a href="#"> 京东旗下网站：京东支付</a>|
+				<a href="#"> 京东云</a>
+			</p>
+			<p class="p3">
+				<img src="/static/item/img/54b8871eNa9a7067e.png" />
+				<img src="/static/item/img/54b8872dNe37a9860.png" />
+				<img src="/static/item/img/54b8875fNad1e0c4c.png" />
+				<img src="/static/item/img/5698dc03N23f2e3b8.jpg" />
+				<img src="/static/item/img/5698dc16Nb2ab99df.jpg" />
+				<img src="/static/item/img/56a89b8fNfbaade9a.jpg" />
+			</p>
+		</div>
+		<div class="Fixedbian">
+			<ul>
+				<li class="li1"><a class="aaa" href="#">顶部</a></li>
+			</ul>
+		</div>
+		<div class="gouwuchexiaguo">
+			<img src="/static/item/img/44.png" />
+			<span>购物车还没有商品，赶紧选购吧！</span>
+		</div>
 </body>
 
 <script src="/static/item/js/jquery1.9.js" type="text/javascript" charset="utf-8"></script>
@@ -475,57 +472,57 @@
 </script>
 
 <script>
-    $(".sku_attr_value").click(function () {
-        // 1、点击的元素添加上自定义的属性
-        let skus = new Array();
-        let curr = $(this).attr("skus").split(",");
+	$(".sku_attr_value").click(function () {
+		// 1、点击的元素添加上自定义的属性
+		let skus = new Array();
+		let curr = $(this).attr("skus").split(",");
 
-        $(this).parent().parent().find(".sku_attr_value").removeClass("checked");
-        $(this).addClass("checked");
-        changeCheckedStyle();
+		$(this).parent().parent().find(".sku_attr_value").removeClass("checked");
+		$(this).addClass("checked");
+		changeCheckedStyle();
 
-        $("a[class='sku_attr_value checked']").each(function () {
-            skus.push($(this).attr("skus").split(","));
-        });
+		$("a[class='sku_attr_value checked']").each(function () {
+			skus.push($(this).attr("skus").split(","));
+		});
 
-        let filterEle = skus[0];
-        for (let i = 1; i < skus.length; i++) {
-            filterEle = $(filterEle).filter(skus[i])[0];
-        }
+		let filterEle = skus[0];
+		for (let i = 1; i < skus.length; i++) {
+			filterEle = $(filterEle).filter(skus[i])[0];
+		}
 
-        location.href = "/item/" + filterEle + ".html";
+		location.href = "/item/" + filterEle + ".html";
 
-        return false;
-    });
-    $(function () {
-        changeCheckedStyle();
-    });
+		return false;
+	});
+	$(function () {
+		changeCheckedStyle();
+	});
 
-    function changeCheckedStyle() {
-        $(".sku_attr_value").parent().css({"border": "solid 1px #ccc"});
-        $("a[class='sku_attr_value checked']").parent().css({"border": "solid 1px red"});
-    };
+	function changeCheckedStyle() {
+		$(".sku_attr_value").parent().css({ "border": "solid 1px #ccc" });
+		$("a[class='sku_attr_value checked']").parent().css({ "border": "solid 1px red" });
+	};
 
 
-    $(".addToCart").click(function () {
-        let skuId = $(this).attr("skuId");
-        let num = $("#productNum").val();
-        location.href = "http://cart.gulimall.com/addCartItem?skuId=" + skuId + "&num=" + num;
-        return false;
-    });
+	$(".addToCart").click(function () {
+		let skuId = $(this).attr("skuId");
+		let num = $("#productNum").val();
+		location.href = "/cart/addCartItem?skuId=" + skuId + "&num=" + num;
+		return false;
+	});
 
-    $(".seckill").click(function () {
-        var isLogin = [[${session.loginUser != null}]];     //true
-        if (isLogin) {
-            var killId = $(this).attr("sessionid") + "-" + $(this).attr("skuid");
-            var code = $(this).attr("code");
-            var num = $("#productNum").val();
-            location.href = "http://seckill.gulimall.com/kill?killId=" + killId + "&key=" + code + "&num=" + num;
-        } else {
-            alert("秒杀请先登录");
-        }
-        return false;
-    });
+	$(".seckill").click(function () {
+		var isLogin = [[${ session.loginUser != null }]];     //true
+		if (isLogin) {
+			var killId = $(this).attr("sessionid") + "-" + $(this).attr("skuid");
+			var code = $(this).attr("code");
+			var num = $("#productNum").val();
+			location.href = "http://seckill.gulimall.com/kill?killId=" + killId + "&key=" + code + "&num=" + num;
+		} else {
+			alert("秒杀请先登录");
+		}
+		return false;
+	});
 
 
 
@@ -536,9 +533,9 @@
 </script>
 
 <style>
-    .Shop .ShopXiangqing .allquanbushop {
-        float: left !important;
-    }
+	.Shop .ShopXiangqing .allquanbushop {
+		float: left !important;
+	}
 </style>
 
 </html>
