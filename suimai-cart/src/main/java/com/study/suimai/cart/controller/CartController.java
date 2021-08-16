@@ -34,5 +34,8 @@ public class CartController {
     return "cartList";
   }
 
-
+  @GetMapping(value = "/addToCart")
+  public String addToCart(){
+    return "success";
+  }
 }
